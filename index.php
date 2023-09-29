@@ -78,13 +78,13 @@
                 <input type="text" placeholder="Mobile number or email"
                 id="email_create"
                 name="email_create"
-                    class="border border-gray-300 py-2 px-3 rounded-md w-full focus:outline-none bg-gray-100" >
+                    class="border border-gray-300 py-2 px-3 rounded-md w-full focus:outline-none bg-gray-100" :class="{'border-red-500':errors.email}">
                     <i class="bi bi-exclamation-circle-fill absolute bottom-2 right-2 text-red-700 hidden"></i>
                 </div>
                 <small x-show="errors.email" x-text="errors.email" class="text-red-500"></small>
             <div class="relative">
             <input type="password" placeholder="New password" name="password_create" id="password_create"
-                class="border border-gray-300 py-2 px-3 rounded-md w-full focus:outline-none bg-gray-100">
+                class="border border-gray-300 py-2 px-3 rounded-md w-full focus:outline-none bg-gray-100" :class="{'border-red-500': errors.password}">
                 <i class="bi bi-exclamation-circle-fill absolute bottom-2 right-2 text-red-700 hidden"></i>
             </div>
             <small x-show="errors.password" x-text="errors.password" class="text-red-500"></small>
