@@ -30,6 +30,11 @@ class AuthController extends Controller
         if ($validator->fails()) {
             $errors = $validator->errors();
 
+        } else {
+            User::create([
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
         }
 
         return response()->json([
