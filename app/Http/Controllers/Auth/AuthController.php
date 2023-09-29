@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -29,7 +30,6 @@ class AuthController extends Controller
         $errors = [];
         if ($validator->fails()) {
             $errors = $validator->errors();
-
         } else {
             User::create([
                 'email' => $request->email,
@@ -41,9 +41,24 @@ class AuthController extends Controller
             'data' => $request->all(),
             'errors' => $errors
         ]);
-
-
     }
 
 
+    public function login(Request $request)
+    {
+
+        $request->validate([
+            'login_email' => 'required|email',
+            'login_password' => 'required|min:8'
+        ]);
+
+        if (Auth::attempt([
+            'email' => $request->login_email,
+            'password' => $request->login_password,
+        ])) {
+            return view('dashboard.index');
+        } else {
+            return back()->withErrors(['invalid_credentials' => 'Usuario o contraseñas invalidas'])->withInput();
+        }
+    }
 }

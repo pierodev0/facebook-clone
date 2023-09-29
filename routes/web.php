@@ -14,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/dashboard', 'dashboard.index')->name('dashboard');
 
-Route::get('/', [AuthController::class,'index'])->name('login');
+Route::get('/', [AuthController::class,'index'])->name('welcome');
 
 // AUTH
 Route::post('/register',[AuthController::class,'register'])->name('register');
+Route::post('/login',[AuthController::class,'login'])->name('login');
+
+Route::middleware('auth')->group(function(){
+    Route::view('/dashboard', 'dashboard.index')->name('dashboard');
+});
