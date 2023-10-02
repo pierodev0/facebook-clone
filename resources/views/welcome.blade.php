@@ -4,6 +4,7 @@
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
+    <title>Face</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
@@ -12,7 +13,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
+
 <body x-data="{ open: false }">
+
 
     <main class="bg-gray-100 h-screen p-10 lg:p-24 transition ease-in" x-bind:class="{ 'opacity-25': open }">
         <div class="flex flex-col gap-6 lg:max-w-[986px] lg:mx-auto lg:flex-row lg:justify-between lg:items-center">

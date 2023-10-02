@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Perfil</title>
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Bootsrap icons -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
@@ -34,7 +32,8 @@
 
 <body>
     <!-- Top bar -->
-    <header class="h-[56px] w-full flex items-center justify-between  py-1.5 px-2 sticky top-0 bg-white">
+    @auth
+    <header class="h-[56px] w-full flex items-center justify-between  py-1.5 px-2 sticky top-0 bg-white shadow-lg">
 
         <div class="flex gap-2 h-full">
             <a href="{{ route('dashboard') }}" class="h-full">
@@ -136,12 +135,33 @@
 
 
     </header><!-- Top bar -->
+    @endauth
 
-    <main class="bg-gray-200 h-screen w-full">
+    @guest
+    <header class="h-[56px] w-full flex items-center justify-between  py-1.5 px-2 sticky top-0 bg-white shadow-lg">
+        <div class="flex gap-2 h-full items-center">
+            <a href="{{ route('dashboard') }}" class="h-full">
+                <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48">
+                    <path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"></path>
+                    <path fill="#fff"
+                        d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z">
+                    </path>
+                </svg>
+            </a>
+            <h1 class="text-2xl font-bold text-blue-800">Facebbok</h1>
+        </div>
+        <div class="flex gap-2">
+            <a href="{{ route('welcome') }}" class="font-semibold text-blue-700 hover:underline">Crear cuenta</a>
+            <a href="{{ route('welcome') }}" class="font-semibold text-blue-700 hover:underline">Iniciar Sesion</a>
+        </div>
+    </header>
+    @endguest
 
+    <main class="bg-gray-100 h-screen w-full" >
+        {{ $slot }}
     </main>
 
-
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
    <script>
     function logout() {
         document.getElementById('logout-form').submit();
