@@ -30,7 +30,7 @@
           </script>
 </head>
 
-<body>
+<body x-data="post" @keydown.escape="post= false">
     <!-- Top bar -->
     @auth
     <header class="h-[56px] w-full flex items-center justify-between  py-1.5 px-2 sticky top-0 bg-white shadow-lg">
@@ -162,12 +162,14 @@
     </main>
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {{-- ADd jquery --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
    <script>
     function logout() {
         document.getElementById('logout-form').submit();
         }
     </script>
-
+    @stack('script')
 </body>
 
 </html>
