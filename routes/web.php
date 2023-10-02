@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,5 @@ Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::middleware('auth')->group(function(){
     Route::view('/dashboard', 'dashboard.index')->name('dashboard');
 });
+
+Route::post('/{user:name}',[PostController::class,'index'])->name('posts.index');

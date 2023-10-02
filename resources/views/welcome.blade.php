@@ -76,7 +76,7 @@
                         <i class="bi bi-exclamation-circle-fill absolute bottom-2 right-2 text-red-700 hidden"></i>
                     </div>
                     <div class="relative">
-                        <input type="text" placeholder="Last name" name="last_name"
+                        <input type="text" placeholder="Last name" id="last_name" name="last_name"
                             class="border border-gray-300 py-2 px-3 rounded-md w-full focus:outline-none bg-gray-100">
                         <i class="bi bi-exclamation-circle-fill absolute bottom-2 right-2 text-red-700 hidden"></i>
                     </div>
@@ -192,6 +192,8 @@
     function crearCuenta() {
         const email = document.querySelector('#email_create').value;
         const password = document.querySelector('#password_create').value;
+        const first_name = document.querySelector('#first_name').value;
+        const last_name = document.querySelector('#last_name').value;
 
         fetch(`/register`, {
                 method: 'POST',
@@ -201,11 +203,14 @@
                 },
                 body: JSON.stringify({
                     email,
-                    password
+                    password,
+                    first_name,
+                    last_name
                 })
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 if (data.errors.length !== 0) {
                     this.errors = data.errors;
                 } else {
