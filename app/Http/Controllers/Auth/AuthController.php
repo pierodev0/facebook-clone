@@ -58,9 +58,7 @@ class AuthController extends Controller
 
         if (Auth::attempt([
             'email' => $request->login_email,
-            'password' => $request->login_password,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'password' => $request->login_password
             ])) {
             return view('dashboard.index');
         } else {

@@ -40,6 +40,9 @@
                         @enderror
                         <input name="login_password" type="password" placeholder="Password"
                             class="border border-gray-300 py-4 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        @error('login_password')
+                            <small class="text-red-500">{{ $message }}</small>
+                        @enderror
                         <button type="submit" class="bg-blue-500 text-white text-xl py-3 rounded-md font-bold">Log
                             in</button>
                     </form>
@@ -213,6 +216,7 @@
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 if (data.errors.length !== 0) {
                     this.errors = data.errors;
                 } else {
