@@ -205,12 +205,11 @@
                     email,
                     password,
                     first_name,
-                    last_name
+                    last_name,
                 })
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 if (data.errors.length !== 0) {
                     this.errors = data.errors;
                 } else {

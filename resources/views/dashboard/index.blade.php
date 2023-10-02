@@ -34,18 +34,18 @@
 
 <body>
     <!-- Top bar -->
-    <header class="h-[56px] w-full flex items-center justify-between py-1.5 px-2 sticky top-0 bg-white">
+    <header class="h-[56px] w-full flex items-center justify-between  py-1.5 px-2 sticky top-0 bg-white">
 
         <div class="flex gap-2 h-full">
-            <div class="h-full">
+            <a href="{{ route('dashboard') }}" class="h-full">
                 <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48">
                     <path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"></path>
                     <path fill="#fff"
                         d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z">
                     </path>
                 </svg>
-            </div>
-            <div class="bg-gray-200 w-72 py-2 px-4 rounded-full flex gap-2" x-data="{open:false}">
+            </a>
+            <div class="bg-gray-200 w-72 overflow-hidden py-2 px-4 rounded-full flex gap-2" x-data="{open:false}">
                 <label for="" class="text-gray-600 transition ease-out flex items-center" :class="{'hidden':open}"><i
                         class="bi bi-search"></i></label>
                 <input type="input"
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="lg:flex h-full hidden">
+        <div class="lg:flex h-full hidden absolute left-[50%] translate-x-[-50%]">
             <a href="#" class="text-gray-500 rounded-md transition ease-in hover:bg-gray-100 px-10 h-full flex items-center">
                 <svg fill="currentColor" viewBox="0 0 24 24" width="25px" height="25px"
                     class="x1lliihq x1k90msu x2h7rmj x1qfuztq xcza8v6 xxk0z11 xvy4d1p">
@@ -105,16 +105,16 @@
 
         <div class="relative" x-data="{open:false}" @click.outside="open=false">
             <figure @click="open=!open">
-                <img src="./assets/perfil.webp" alt="" class=" active:brightness-90 object-cover w-[40px] aspect-square bg-sky-300 rounded-full hover:bg-sky-500 cursor-pointer">
+                <img src="{{ asset('assets/perfil.webp') }}" alt="" class=" active:brightness-90 object-cover w-[40px] aspect-square bg-sky-300 rounded-full hover:bg-sky-500 cursor-pointer">
             </figure>
 
             <div class="absolute right-0 z-10 mt-1 bg-white w-80 origin-top-right rounded-md p-3 shadow-2xl opacity-0 transition duration-75 ease-in" :class="{'!opacity-100':open}">
                <div class="mb-3 p-1 shadow-2xl cursor-pointer">
                 <a href="" class="flex gap-2  items-center  hover:bg-gray-100 p-2 rounded-md">
                     <figure >
-                        <img src="./assets/perfil.webp" alt="" class="hover:brightness-90 object-cover w-[40px] aspect-square bg-sky-300 rounded-full hover:bg-sky-500 cursor-pointer">
+                        <img src="{{ asset('assets/perfil.webp') }}" alt="" class="hover:brightness-90 object-cover w-[40px] aspect-square bg-sky-300 rounded-full hover:bg-sky-500 cursor-pointer">
                     </figure>
-                    {{-- <p class="font-semibold">{{ auth()->user()}}</p> --}}
+                    <p class="font-semibold">{{ auth()->user()->fullname()}}</p>
                 </a>
                </div>
 
@@ -123,11 +123,14 @@
                 <p class="font-semibold text-sm">Configuracion y privacidad</p>
                </a>
 
-               <a href="" class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-sm">
+               <a @click.prevent="logout"
+               class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-sm cursor-pointer">
                 <span class="bg-gray-200 w-10 grid place-content-center aspect-square rounded-full"><i data-visualcompletion="css-img" class="x1b0d499 xep6ejk" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yx/r/V5DQqvdBvFv.png&quot;); background-position: 0px -478px; background-size: 26px 972px; width: 20px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i></span>
                 <p class="font-semibold text-sm">Cerrar Sesion</p>
                </a>
-
+               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                    @csrf
+                </form>
             </div>
         </div>
 
@@ -137,6 +140,13 @@
     <main class="bg-gray-200 h-screen w-full">
 
     </main>
+
+
+   <script>
+    function logout() {
+        document.getElementById('logout-form').submit();
+        }
+    </script>
 
 </body>
 

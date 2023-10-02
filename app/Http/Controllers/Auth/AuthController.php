@@ -37,6 +37,8 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
             ]);
+
+            auth()->attempt($request->only('email','password'));
         }
 
         return response()->json([
@@ -57,10 +59,19 @@ class AuthController extends Controller
         if (Auth::attempt([
             'email' => $request->login_email,
             'password' => $request->login_password,
-        ])) {
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            ])) {
             return view('dashboard.index');
         } else {
             return back()->withErrors(['invalid_credentials' => 'Usuario o contraseñas invalidas'])->withInput();
         }
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        return redirect()->route('welcome');
     }
 }
